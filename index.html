@@ -240,17 +240,16 @@
       <span class="report-kicker">06 · Demo</span>
       <h2 class="report-h2">See Bioinfoysis in action</h2>
       <div class="report-body">
-        <div class="report-video">
           <!-- Replace the placeholder with the real video once ready:
                <video controls preload="metadata" src="assets/video/demo.mp4"></video> -->
-          <div class="report-video-placeholder">
             <div class="video-play">▶</div>
-            <span>Demo video coming soon</span>
-          </div>
-        </div>
-        <p class="report-video-caption">An end-to-end analysis run: from a natural-language request to a verified, artifact-grounded report.</p>
       </div>
     </section>
+
+      <div id="case-grid" class="case-grid"></div>
+    </section>
+
+    <dialog id="case-dialog" class="case-dialog"><div class="dialog-head"><div><p id="dialog-kicker" class="eyebrow"></p><h2 id="dialog-title"></h2></div><button class="icon-button" data-close aria-label="关闭">×</button></div><div class="dialog-tabs"><button class="tab is-active" data-tab="context">任务背景</button><button class="tab" data-tab="report">浏览报告</button></div><section class="dialog-body"><div id="context-panel"><p id="dialog-context"></p><div class="result-box"><span>主要结果</span><p id="dialog-result"></p></div></div><div id="report-panel" hidden><iframe id="report-frame" title="分析报告"></iframe><p class="report-note">报告仅用于在线浏览。</p></div></section><div class="dialog-foot"><button class="secondary-button" data-prev>← 上一个</button><span id="dialog-count"></span><button class="secondary-button" data-next>下一个 →</button></div></dialog>
 
     <!-- 7. Citation -->
     <section id="citation">
@@ -321,6 +320,7 @@
   checkShift();
 })();
 </script>
+<script src="assets/js/demo.js"></script>
 <script src="assets/js/main.js?v=20260817-report7"></script>
 </body>
 </html>
