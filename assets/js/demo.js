@@ -1,2 +1,58 @@
-const cases=[{title:'弥漫大B细胞淋巴瘤预后风险模型构建',desc:'420例 DLBCL 队列，基于 63 基因 LASSO-Cox 构建并验证预后模型。',context:'基于 DLBCL 患者转录组与生存信息筛选稳定的预后特征，建立可解释的风险分层模型。',result:'高低风险组生存差异显著（P=1.18e-31），调整后 HR=4.59；C-index 从 0.731 提升至 0.862。',video:'assets/video/1.mp4',report:'assets/reports/report-1.pdf'},{title:'造血分化单细胞拟时序轨迹分析',desc:'8,399 个小鼠骨髓细胞，追踪造血分化路径与动态基因。',context:'利用单细胞数据重建造血细胞从祖细胞到成熟细胞的连续分化轨迹。',result:'识别 6 条分化路径、4 个分支点及 10,415 个动态表达基因。',video:'assets/video/2.mp4',report:'assets/reports/report-2.pdf'},{title:'蛋白互作网络（PPI）分析',desc:'溃疡性结肠炎与健康对照的差异基因及核心互作网络。',context:'从 GSE65114 中筛选 UC 相关差异基因，构建 STRING 蛋白互作网络并定位关键节点。',result:'获得 299 个差异基因，网络包含 224 个节点、1,283 条边，筛出 8 个 hub genes。',video:'assets/video/3.mp4',report:'assets/reports/report-3.pdf'},{title:'单细胞 RNA-seq：PBMC3k 聚类与注释',desc:'从 QC、降维、聚类到细胞类型注释的完整 PBMC3k 工作流。',context:'对 PBMC3k 单细胞数据完成质量控制、聚类及基于标记基因的细胞类型注释。',result:'保留 2,643 个细胞，得到 10 个聚类、9 种细胞类型和 3,527 个 marker genes。',video:'assets/video/4.mp4',report:'assets/reports/report-4.pdf'},{title:'生物标志物筛选（机器学习）',desc:'HCM 患者与对照的差异分析、LASSO/SVM-RFE 筛选及验证。',context:'整合 106 例 HCM 患者与 39 例对照数据，筛选具有诊断价值的氧化应激相关标志物。',result:'从 899 个差异基因中得到 PRKCD、MGST1、CA3；对应 AUC 为 0.981、0.968、0.917。',video:'assets/video/5.mp4',report:'assets/reports/report-5.pdf'}];
-const grid=document.querySelector('#case-grid'),dialog=document.querySelector('#case-dialog');let current=0;grid.innerHTML=cases.map((x,i)=>`<article class="case-card"><video controls preload="metadata" playsinline src="${x.video}"></video><div class="case-copy"><span class="case-index">CASE ${String(i+1).padStart(2,'0')}</span><h2>${x.title}</h2><p>${x.desc}</p><div class="case-actions"><button class="primary-button" data-open="${i}">任务背景</button><button class="secondary-button" data-open-report="${i}">浏览报告</button></div></div></article>`).join('');const title=document.querySelector('#dialog-title'),context=document.querySelector('#dialog-context'),result=document.querySelector('#dialog-result'),frame=document.querySelector('#report-frame'),count=document.querySelector('#dialog-count');function tab(t){document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('is-active',b.dataset.tab===t));document.querySelector('#context-panel').hidden=t!=='context';document.querySelector('#report-panel').hidden=t!=='report'}function openCase(i,t='context'){current=(i+cases.length)%cases.length;const x=cases[current];document.querySelector('#dialog-kicker').textContent=`CASE ${String(current+1).padStart(2,'0')}`;title.textContent=x.title;context.textContent=x.context;result.textContent=x.result;frame.src=`${x.report}#toolbar=0&navpanes=0`;count.textContent=`${current+1} / ${cases.length}`;tab(t);dialog.showModal()}grid.onclick=e=>{const b=e.target.closest('[data-open],[data-open-report]');if(b)openCase(Number(b.dataset.open??b.dataset.openReport),b.dataset.openReport?'report':'context')};document.querySelector('[data-close]').onclick=()=>dialog.close();document.querySelector('[data-prev]').onclick=()=>openCase(current-1);document.querySelector('[data-next]').onclick=()=>openCase(current+1);document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>tab(b.dataset.tab));dialog.onclick=e=>{if(e.target===dialog)dialog.close()};let sx=0;dialog.ontouchstart=e=>sx=e.changedTouches[0].screenX;dialog.ontouchend=e=>{const dx=e.changedTouches[0].screenX-sx;if(Math.abs(dx)>55)openCase(current+(dx<0?1:-1))};
+const cases = [
+  { title: 'DLBCL Prognostic Risk Model', desc: 'A 63-gene LASSO-Cox model for stratifying patients by survival risk.', context: 'Using gene-expression profiles and follow-up data from 420 DLBCL patients, this analysis builds and validates a prognostic model independent of age, stage, LDH, and ECOG status.', result: 'High- and low-risk groups differ significantly (P=1.18e-31); adjusted HR=4.59; C-index improves from 0.731 to 0.862.', video: 'assets/video/1-web.mp4', report: 'assets/reports/report-1.pdf' },
+  { title: 'Single-Cell Hematopoietic Trajectory', desc: 'Reconstructing differentiation paths from HSCs to mature blood cells.', context: 'This task uses mouse bone-marrow single-cell RNA-seq data to reconstruct continuous differentiation trajectories, identify branch points, and find regulators of cell fate decisions.', result: '8,399 cells; 6 differentiation paths; 4 branch points; 10,415 dynamic genes identified.', video: 'assets/video/2-web.mp4', report: 'assets/reports/report-2.pdf' },
+  { title: 'Protein-Protein Interaction Network', desc: 'Identifying core hub genes from ulcerative-colitis differential expression data.', context: 'Differentially expressed genes from GSE65114 are used to build a STRING protein-interaction network, followed by module analysis and topology-based hub-gene screening.', result: '299 DEGs; 224 nodes and 1,283 edges; 8 hub genes selected.', video: 'assets/video/3-web.mp4', report: 'assets/reports/report-3.pdf' },
+  { title: 'PBMC3k Clustering and Annotation', desc: 'A complete single-cell workflow from quality control to immune-cell annotation.', context: 'Starting from the PBMC3k expression matrix, the workflow performs QC, normalization, highly variable gene selection, PCA, Louvain clustering, UMAP, and marker-based annotation.', result: '2,643 cells retained; 10 clusters; 9 PBMC cell types annotated.', video: 'assets/video/4-web.mp4', report: 'assets/reports/report-4.pdf' },
+  { title: 'Machine-Learning Biomarker Screening', desc: 'Combining LASSO and SVM-RFE to identify HCM diagnostic biomarkers.', context: 'Differential expression and oxidative-stress gene sets are integrated with LASSO and SVM-RFE to identify stable diagnostic biomarkers for hypertrophic cardiomyopathy.', result: 'PRKCD, MGST1, and CA3 selected; corresponding AUC values are 0.981, 0.968, and 0.917.', video: 'assets/video/5-web.mp4', report: 'assets/reports/report-5.pdf' }
+];
+
+const grid = document.querySelector('#case-grid');
+const dialog = document.querySelector('#case-dialog');
+let current = 0;
+
+grid.innerHTML = cases.map((item, index) => `<article class="case-card"><video controls controlslist="nodownload noplaybackrate" disablepictureinpicture preload="none" playsinline oncontextmenu="return false" src="${item.video}"></video><div class="case-copy"><span class="case-index">CASE ${String(index + 1).padStart(2, '0')}</span><h2>${item.title}</h2><p>${item.desc}</p><div class="case-actions"><button class="primary-button" data-open="${index}">Task Background</button><button class="secondary-button" data-open-report="${index}">View Report</button></div></div></article>`).join('');
+
+const title = document.querySelector('#dialog-title');
+const context = document.querySelector('#dialog-context');
+const result = document.querySelector('#dialog-result');
+const frame = document.querySelector('#report-frame');
+const count = document.querySelector('#dialog-count');
+
+function setTab(tabName) {
+  document.querySelectorAll('[data-tab]').forEach(button => button.classList.toggle('is-active', button.dataset.tab === tabName));
+  document.querySelector('#context-panel').hidden = tabName !== 'context';
+  document.querySelector('#report-panel').hidden = tabName !== 'report';
+}
+
+function openCase(index, tabName = 'context') {
+  current = (index + cases.length) % cases.length;
+  const item = cases[current];
+  document.querySelector('#dialog-kicker').textContent = `CASE ${String(current + 1).padStart(2, '0')}`;
+  title.textContent = item.title;
+  context.textContent = item.context;
+  result.textContent = item.result;
+  frame.src = `${item.report}#toolbar=0&navpanes=0`;
+  count.textContent = `${current + 1} / ${cases.length}`;
+  setTab(tabName);
+  if (!dialog.open) dialog.showModal();
+}
+
+grid.addEventListener('click', event => {
+  const button = event.target.closest('[data-open], [data-open-report]');
+  if (!button) return;
+  const isReport = button.dataset.openReport !== undefined;
+  openCase(Number(button.dataset.open ?? button.dataset.openReport), isReport ? 'report' : 'context');
+});
+
+document.querySelector('[data-close]').addEventListener('click', () => dialog.close());
+document.querySelector('[data-prev]').addEventListener('click', () => openCase(current - 1));
+document.querySelector('[data-next]').addEventListener('click', () => openCase(current + 1));
+document.querySelectorAll('[data-tab]').forEach(button => button.addEventListener('click', () => setTab(button.dataset.tab)));
+dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+
+let touchStartX = 0;
+dialog.addEventListener('touchstart', event => { touchStartX = event.changedTouches[0].screenX; }, { passive: true });
+dialog.addEventListener('touchend', event => {
+  const delta = event.changedTouches[0].screenX - touchStartX;
+  if (Math.abs(delta) > 55) openCase(current + (delta < 0 ? 1 : -1));
+});
