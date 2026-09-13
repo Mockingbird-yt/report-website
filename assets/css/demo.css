@@ -9,8 +9,9 @@
 .report-note{text-align:center}
 :root{--ink:#17211b;--muted:#69756d;--line:#dce5df;--green:#1f6b4b;--paper:#f7faf8}.report-video{display:none}.demo-page{background:var(--paper);color:var(--ink);font-family:var(--font,Arial,sans-serif)}
 .case-card video{display:block;width:100%;height:auto;aspect-ratio:auto;object-fit:contain;background:#17211b}
-.case-dialog{position:fixed;inset:0;margin:auto;width:min(1080px,calc(100vw - 48px));max-width:none;max-height:calc(100vh - 48px);padding:0;border:0;border-radius:12px;overflow:hidden;color:var(--ink);background:#fff;box-shadow:0 24px 90px #10261d66}
-.case-dialog::backdrop{background:#10261db3}
+.case-dialog{position:fixed;z-index:1000;inset:0;margin:auto;width:min(1080px,calc(100vw - 48px));max-width:none;max-height:calc(100vh - 48px);padding:0;border:0;border-radius:12px;overflow:hidden;color:var(--ink);background:#fff;box-shadow:0 24px 90px #10261d66}
+.case-dialog[open]{display:flex;flex-direction:column}
+.case-dialog::backdrop{background:#10261d59}
 .dialog-head{padding:28px 34px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
 .dialog-head h2{margin:8px 0 0;font-size:clamp(1.5rem,3vw,2.2rem)}
 .dialog-tabs{display:flex;justify-content:center;align-items:center;gap:34px;padding:0 26px;border-bottom:1px solid var(--line)}
