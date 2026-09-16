@@ -851,9 +851,7 @@ a.card:hover, .card:hover {
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(circle at 50% 0%, rgba(168, 230, 239, 0.34), transparent 42%),
-    linear-gradient(rgba(18, 23, 22, 0.08) 1px, transparent 1px);
-  background-size: auto, 100% 170px;
+    radial-gradient(circle at 50% 0%, rgba(168, 230, 239, 0.34), transparent 42%);
 }
 .page-hero .container {
   display: flex;
