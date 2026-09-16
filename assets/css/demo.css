@@ -9,8 +9,8 @@
 .report-note{text-align:center}
 .report-links{display:flex;flex-wrap:wrap;gap:14px;margin:30px 0 34px}
 .report-links .btn{min-height:52px;padding:14px 26px;border-radius:16px;font-size:15px;letter-spacing:.01em}
-.report-links .btn-primary{background:#14201c;box-shadow:0 10px 24px rgba(20,32,28,.14)}
-.report-links .btn-primary:hover{background:#1f6b4b;box-shadow:0 15px 30px rgba(31,107,75,.22)}
+.report-links .btn-primary{border-color:#16583d;background:#247653;color:#f8fff9;box-shadow:0 10px 24px rgba(24,94,65,.2)}
+.report-links .btn-primary:hover{border-color:#124a34;background:#1d6648;box-shadow:0 15px 30px rgba(31,107,75,.28)}
 .report-links .btn-ghost{border-color:#8da198;background:rgba(255,255,255,.7)}
 .report-links .btn-ghost:hover{border-color:#1f6b4b;color:#1f6b4b;background:#fff;box-shadow:0 12px 26px rgba(31,107,75,.12)}
 :root{--ink:#17211b;--muted:#69756d;--line:#dce5df;--green:#1f6b4b;--paper:#f7faf8}.report-video{display:none}.demo-page{background:var(--paper);color:var(--ink);font-family:var(--font,Arial,sans-serif)}
@@ -68,4 +68,3 @@
 /* ===== Responsive ===== */
 @media(max-width:900px){.case-card{grid-template-columns:1fr;gap:20px;padding:14px}}
 @media(max-width:700px){.case-actions{flex-direction:column;align-items:stretch}.case-actions .primary-button,.case-actions .secondary-button{width:100%;text-align:center}.dialog-foot{flex-wrap:wrap;gap:10px;justify-content:center}.dialog-count{order:-1;width:100%;text-align:center}}
-
